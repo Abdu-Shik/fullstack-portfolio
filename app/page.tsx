@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { MessageCircle } from "lucide-react";
+import { MessageCircle, Shield } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight } from "lucide-react";
 import prisma from "@/lib/db"
@@ -18,6 +18,15 @@ export default async function Home() {
         <p className="text-muted-foreground text-lg max-w-md mb-6">
           A fullstack developer passionate about building great web experiences.
         </p>
+
+        <div className="fixed bottom-6 right-6">
+          <Button asChild variant="secondary" size="sm">
+              <Link href="/admin/login">
+                  <Shield className="w-4 h-4 mr-2" />
+                  Admin Login
+              </Link>
+          </Button>
+        </div>
 
         <div className="flex gap-4">
           <Button asChild>

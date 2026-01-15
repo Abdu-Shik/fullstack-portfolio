@@ -18,30 +18,31 @@ export default async function BlogPage() {
                         Back to Home
                     </Link>
                 </Button>
-            </div>
+            
 
-            <h1>Blogs</h1>
-            {posts.length > 0 ? (
-                <div className='flex flex-col gap-4'>
-                    {posts.map(post => (
-                    <Card
-                        key = {post.id}
-                        className="hover:bg-accent transition-colors"
-                    >
-                        <Link href={`/blog/${post.slug}`}>
-                        <CardContent className="p-4">
-                            <h3 className="font-semibold">{post.title}</h3>
-                            <p className="text-sm text-muted-foreground">
-                            {new Date(post.createdAt).toLocaleDateString()}
-                            </p>
-                        </CardContent>
-                        </Link>
-                    </Card>
-                    ))}
-                </div>
-            ) : (
-                <p className="text-muted-foreground">No posts yet.</p>
-            )}
+                <h1 className="text-2xl font-bold mb-4">Blogs</h1>
+                {posts.length > 0 ? (
+                    <div className='flex flex-col gap-4'>
+                        {posts.map(post => (
+                        <Card
+                            key = {post.id}
+                            className="hover:bg-accent transition-colors"
+                        >
+                            <Link href={`/blog/${post.slug}`}>
+                            <CardContent className="p-4">
+                                <h3 className="font-semibold">{post.title}</h3>
+                                <p className="text-sm text-muted-foreground">
+                                {new Date(post.createdAt).toLocaleDateString()}
+                                </p>
+                            </CardContent>
+                            </Link>
+                        </Card>
+                        ))}
+                    </div>
+                ) : (
+                    <p className="text-muted-foreground">No posts yet.</p>
+                )}
+            </div>
         </main>
     )
 }
