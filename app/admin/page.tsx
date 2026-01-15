@@ -28,7 +28,7 @@ export default async function AdminPage() {
           <form method="POST" action="/api/admin/logout">
             <Button
               type="submit"
-              className="px-4 py-2 text-white rounded hover:bg-gray-600"
+              className="px-4 py-2 text-white rounded hover:bg-gray-600 cursor-pointer"
             >
               Logout
             </Button>
@@ -61,7 +61,7 @@ export default async function AdminPage() {
             />
             <Button
               type="submit"
-              className="px-4 py-2 text-white rounded hover:bg-gray-600"
+              className="px-4 py-2 text-white rounded hover:bg-gray-600 cursor-pointer"
             >
               Create Post
             </Button>
@@ -97,7 +97,7 @@ export default async function AdminPage() {
                     <input type="hidden" name="id" value={post.id} />
                     <Button
                       type="submit"
-                      className="px-3 py-1 text-white rounded hover:bg-red-600 transition-colors"
+                      className="px-3 py-1 text-white rounded hover:bg-red-600 transition-colors cursor-pointer"
                     >
                       Delete
                     </Button>
