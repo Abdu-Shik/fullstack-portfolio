@@ -66,37 +66,45 @@ export default async function AdminPage() {
           <h2 className="text-xl font-semibold mb-2">All Posts</h2>
           <div className="flex flex-col gap-4">
             {posts.map((post) => (
-              <Card key={post.id} className="relative bg-white shadow-sm hover:shadow-md transition-shadow">
-                {/* Left: title + date clickable */}
-                <Link
-                  href={`/blog/${post.slug}`}
-                  className="block p-4"
-                >
-                  <CardHeader className="flex justify-between items-center pointer-events-none">
-                    <div>
-                      <CardTitle>
+              <Card 
+                key={post.id}
+                className="bg-white shadow-sm hover:shadow-md transition-shadow"
+              >
+                <CardHeader className="flex flex-row items-center">
+                  {/* Left: title + date */}
+                  <div>
+                    <CardTitle>
+                      <Link href={`/blog/${post.slug}`} className="hover:underline">
                         {post.title}
-                      </CardTitle>
-                      <p className="text-sm text-muted-foreground">
-                        {new Date(post.createdAt).toLocaleDateString()}
-                      </p>
-                    </div>
-                  </CardHeader>
-                </Link>
+                      </Link>
+                    </CardTitle>
+                    <p className="text-sm text-muted-foreground">
+                      {new Date(post.createdAt).toLocaleDateString()}
+                    </p>
+                  </div>
 
-                {/* Right: Delete button */}
-                <div className="absolute top-4 right-4">
-                  <form method="POST" action="/api/admin/post/delete">
-                    <input type="hidden" name="id" value={post.id} />
-                    <Button
-                      type="submit"
-                      className="px-3 py-1 text-white rounded hover:bg-red-600 transition-colors cursor-pointer"
-                    >
-                      Delete
-                    </Button>
-                  </form>
-                </div>
+                  {/* Right: actions */}
+                  <div className="ml-auto flex gap-2">
+                    <Link href={`/admin/edit/${post.id}`}>
+                      <Button size="sm" variant="outline" className="cursor-pointer">
+                        Edit
+                      </Button>
+                    </Link>
+
+                    <form method="POST" action="/api/admin/post/delete">
+                      <input type="hidden" name="id" value={post.id} />
+                      <Button
+                        type="submit"
+                        size="sm"
+                        className="cursor-pointer hover:bg-red-600"
+                      >
+                        Delete
+                      </Button>
+                    </form>
+                  </div>
+                </CardHeader>
               </Card>
+
 
 
             ))}
