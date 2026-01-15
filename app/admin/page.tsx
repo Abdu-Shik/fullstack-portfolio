@@ -46,13 +46,6 @@ export default async function AdminPage() {
               required
               className="border rounded px-3 py-2"
             />
-            <Input
-              type="text"
-              name="slug"
-              placeholder="Slug (url-friendly)"
-              required
-              className="border rounded px-3 py-2"
-            />
             <Textarea
               name="content"
               placeholder="Content"
@@ -108,9 +101,7 @@ export default async function AdminPage() {
 
             ))}
           </div>
-
         </div>
-
       </div>
     </main>
   );

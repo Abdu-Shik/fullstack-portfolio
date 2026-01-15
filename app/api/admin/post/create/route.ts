@@ -6,9 +6,9 @@ function slugify(text: string) {
   return text
     .toLowerCase()
     .trim()
-    .replace(/[^a-z0-9\s-]/g, "")
-    .replace(/\s+/g, "-")
-    .replace(/-+/g, "-");
+    .replace(/[^a-z0-9\s-]/g, "") // remove special chars
+    .replace(/\s+/g, "-")         // spaces → dash
+    .replace(/-+/g, "-");         // collapse dashes
 }
 
 export async function POST(req: Request) {
@@ -19,38 +19,34 @@ export async function POST(req: Request) {
 
   const formData = await req.formData();
   const title = formData.get("title")?.toString();
-  let slug = formData.get("slug")?.toString();
   const content = formData.get("content")?.toString();
 
-  if (!title || !slug || !content) {
+  if (!title || !content) {
     return NextResponse.json({ error: "Missing fields" }, { status: 400 });
   }
 
-  //  Normalize slug
-  slug = slugify(slug);
+  // Base slug
+  let slug = slugify(title);
 
-  // Final validation
-  if (!/^[a-z0-9-]+$/.test(slug)) {
-    return NextResponse.json(
-      { error: "Invalid slug format" },
-      { status: 400 }
-    );
-  }
+  // Ensure uniqueness
+  let uniqueSlug = slug;
+  let counter = 1;
 
-  // Check uniqueness
-  const existing = await prisma.blogPost.findUnique({ where: { slug } });
-  if (existing) {
-    return NextResponse.json(
-      { error: "Slug already exists" },
-      { status: 400 }
-    );
+  while (
+    await prisma.blogPost.findUnique({ where: { slug: uniqueSlug } })
+  ) {
+    uniqueSlug = `${slug}-${counter}`;
+    counter++;
   }
 
   await prisma.blogPost.create({
-    data: { title, slug, content },
+    data: {
+      title,
+      slug: uniqueSlug,
+      content,
+    },
   });
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
   return NextResponse.redirect(`${baseUrl}/admin`, 303);
 }
-
