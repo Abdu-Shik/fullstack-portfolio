@@ -21,5 +21,8 @@ export async function POST(req: Request) {
     data: { title, slug, content },
   });
 
-  return NextResponse.redirect("/admin");
+  // --- FIXED: use absolute URL ---
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+  return NextResponse.redirect(`${baseUrl}/admin`, 303);
 }
+

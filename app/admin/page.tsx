@@ -71,24 +71,26 @@ export default async function AdminPage() {
           <h2 className="text-xl font-semibold mb-2">All Posts</h2>
           <div className="flex flex-col gap-4">
             {posts.map((post) => (
-              <Card key={post.id} className="bg-white shadow-sm hover:shadow-md transition-shadow">
-                <CardHeader className="flex justify-between items-center">
-                  {/* Left: title + date */}
-                  <div>
-                    <CardTitle>
-                      <Link
-                        href={`/blog/${post.slug}`}
-                        className="hover:underline"
-                      >
+              <Card key={post.id} className="relative bg-white shadow-sm hover:shadow-md transition-shadow">
+                {/* Left: title + date clickable */}
+                <Link
+                  href={`/blog/${post.slug}`}
+                  className="block p-4"
+                >
+                  <CardHeader className="flex justify-between items-center pointer-events-none">
+                    <div>
+                      <CardTitle>
                         {post.title}
-                      </Link>
-                    </CardTitle>
-                    <p className="text-sm text-muted-foreground">
-                      {new Date(post.createdAt).toLocaleDateString()}
-                    </p>
-                  </div>
+                      </CardTitle>
+                      <p className="text-sm text-muted-foreground">
+                        {new Date(post.createdAt).toLocaleDateString()}
+                      </p>
+                    </div>
+                  </CardHeader>
+                </Link>
 
-                  {/* Right: Delete button, same style as previous li version */}
+                {/* Right: Delete button */}
+                <div className="absolute top-4 right-4">
                   <form method="POST" action="/api/admin/post/delete">
                     <input type="hidden" name="id" value={post.id} />
                     <Button
@@ -98,15 +100,10 @@ export default async function AdminPage() {
                       Delete
                     </Button>
                   </form>
-                </CardHeader>
-
-                {/* Optional content preview */}
-                {post.content && (
-                  <CardContent>
-                    <p className="text-sm text-gray-700 line-clamp-3">{post.content}</p>
-                  </CardContent>
-                )}
+                </div>
               </Card>
+
+
             ))}
           </div>
 

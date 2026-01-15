@@ -15,5 +15,7 @@ export async function POST(req: Request) {
 
   await prisma.blogPost.delete({ where: { id } });
 
-  return NextResponse.redirect("/admin");
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+  return NextResponse.redirect(`${baseUrl}/admin`, 303);
 }
+
