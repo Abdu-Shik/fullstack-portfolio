@@ -4,6 +4,8 @@ import prisma from "@/lib/db";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 
 export default async function AdminPage() {
   // --- CHECK IF ADMIN ---
@@ -37,21 +39,21 @@ export default async function AdminPage() {
         <div className="mb-6">
           <h2 className="text-xl font-semibold mb-2">Create New Post</h2>
           <form method="POST" action="/api/admin/post/create" className="flex flex-col gap-2">
-            <input
+            <Input
               type="text"
               name="title"
               placeholder="Post title"
               required
               className="border rounded px-3 py-2"
             />
-            <input
+            <Input
               type="text"
               name="slug"
               placeholder="Slug (url-friendly)"
               required
               className="border rounded px-3 py-2"
             />
-            <textarea
+            <Textarea
               name="content"
               placeholder="Content"
               required
