@@ -24,19 +24,20 @@ export default async function BlogPage() {
                 {posts.length > 0 ? (
                     <div className='flex flex-col gap-4'>
                         {posts.map(post => (
-                        <Card
-                            key = {post.id}
-                            className="hover:bg-accent transition-colors"
-                        >
-                            <Link href={`/blog/${post.slug}`}>
-                            <CardContent className="p-4">
-                                <h3 className="font-semibold">{post.title}</h3>
-                                <p className="text-sm text-muted-foreground">
-                                {new Date(post.createdAt).toLocaleDateString()}
-                                </p>
-                            </CardContent>
-                            </Link>
-                        </Card>
+                        <Link href={`/blog/${post.slug}`}>
+                            <Card
+                                key = {post.id}
+                                className="hover:bg-accent transition-colors"
+                            >
+                                <CardContent className="p-4">
+                                    <h3 className="font-semibold">{post.title}</h3>
+                                    <p className="text-sm text-muted-foreground">
+                                    {new Date(post.createdAt).toLocaleDateString()}
+                                    </p>
+                                </CardContent>
+                                
+                            </Card>
+                        </Link>
                         ))}
                     </div>
                 ) : (

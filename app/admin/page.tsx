@@ -70,18 +70,20 @@ export default async function AdminPage() {
                 key={post.id}
                 className="bg-white shadow-sm hover:shadow-md transition-shadow"
               >
-                <CardHeader className="flex flex-row items-center">
+                <CardHeader className="flex flex-row items-stretch">
                   {/* Left: title + date */}
-                  <div>
-                    <CardTitle>
-                      <Link href={`/blog/${post.slug}`} className="hover:underline">
-                        {post.title}
-                      </Link>
-                    </CardTitle>
-                    <p className="text-sm text-muted-foreground">
-                      {new Date(post.createdAt).toLocaleDateString()}
-                    </p>
-                  </div>
+                  <Link href={`/blog/${post.slug}`} className="flex-1 flex flex-col justify-center px-2 py-4 hover:underline">
+                    <div>
+                      <CardTitle>
+                        
+                          {post.title}
+                        
+                      </CardTitle>
+                      <p className="text-sm text-muted-foreground">
+                        {new Date(post.createdAt).toLocaleDateString()}
+                      </p>
+                    </div>
+                  </Link>
 
                   {/* Right: actions */}
                   <div className="ml-auto flex gap-2">
