@@ -86,7 +86,7 @@ export default async function AdminPage() {
                   </Link>
 
                   {/* Right: actions */}
-                  <div className="ml-auto flex gap-2">
+                  <div className="ml-auto flex items-center gap-2">
                     <Link href={`/admin/edit/${post.id}`}>
                       <Button size="sm" variant="outline" className="cursor-pointer">
                         Edit
@@ -106,9 +106,6 @@ export default async function AdminPage() {
                   </div>
                 </CardHeader>
               </Card>
-
-
-
             ))}
           </div>
         </div>
