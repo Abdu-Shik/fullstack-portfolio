@@ -56,7 +56,7 @@ export default async function Home() {
         {posts.length > 0 ? (
           <div className="flex flex-col gap-4">
             {posts.map(post => (
-              <Link href={`/blog/${post.slug}`}>
+              <Link href={`/blog/${post.slug}`} key={post.id}>
                 <Card
                   key = {post.id}
                   className="hover:bg-accent transition-colors"
